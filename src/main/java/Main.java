@@ -2,7 +2,9 @@
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("hi");
+		Application application = new Application();
+		application.start();
+		
 
 	}
 
