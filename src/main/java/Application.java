@@ -31,12 +31,21 @@ public class Application {
 		 String arrayOfWords[] = textFromUrl.split(" ");
 		 //go through each word in the array either placing them in HashMap or incrementing its count value
 		 for(String word: arrayOfWords) {
+			 String cleanedWord = this.cleanWord(word);
 			 //if the word is alread in the hashmap store its count in the count variable, otherwise make count 0
-			 int count = countByWord.containsKey(word) ? countByWord.get(word) : 0; 
+			 int count = countByWord.containsKey(cleanedWord) ? countByWord.get(cleanedWord) : 0; 
 			 //add the word to the hashtable with either a count value incremented by 1
-			 countByWord.put(word, count+1);
+			 countByWord.put(cleanedWord, count+1);
 		 }
 		 System.out.println(countByWord);
 		 		 
-	}	
+	}
+	
+	public String cleanWord (String word) {
+		//turn string to lowercase to standardize all text
+		String lowerCaseWord = word.toLowerCase();
+		//remove any characters that aren't hyphens
+		String cleanedWord = lowerCaseWord.replaceAll("[^a-zA-Z&&[^-]]", "");
+		return cleanedWord;
+	}
 }
