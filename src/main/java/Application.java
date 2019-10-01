@@ -5,8 +5,8 @@ import org.jsoup.Jsoup;
 
 public class Application {
 	
-	  //create hashmap to store each individual word
-	  public HashMap<Integer, String>   = new HashMap<Integer, String>();
+	  //create hashmap to store the count of each individual word
+	  public HashMap<String, Integer> countByWord   = new HashMap<String, Integer>();
 
 	//this method begins the application after being called from the Main class
 	public void start () throws IOException {
