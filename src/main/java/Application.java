@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 import org.jsoup.Jsoup;
@@ -7,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.Map.Entry;
 
 
@@ -25,7 +27,8 @@ public class Application {
 		//sort all words from the url and sort them by number of time they appear
 		Map<String,Integer> sortedCountByWords = this.sortByCount(unsortedCountByWords);
 		//Go through sorted word list and log first 25 words
-		
+		int wordsDesired = 25;
+		this.printTopWordsOnWebPage(sortedCountByWords,wordsDesired);
 		//prompt the user if they would like to pass a new url
 		
 		
@@ -70,18 +73,27 @@ public class Application {
 	
 	
 	public Map<String, Integer> sortByCount(Map<String, Integer> unsortedCountByWord) {
-		
 	    Map<String, Integer> sortedWordByCount = unsortedCountByWord
-	    		//store the key/value pairs within a single set object
-	    		.entrySet()
-	    		//use stream API in order to be able to utilize sorted method
-	    		.stream()
-	    		//sort the elements based on their value from large
-	    		.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-	    		//create a linked map collection with the key/value pairs of each element within the stream. A linkedmap is used in order to maintain order of the map
-	    		.collect( Collectors.toMap(element -> element.getKey(), element -> element.getValue(), (element1, element2) -> element2, LinkedHashMap::new));
-	    		return sortedWordByCount;
+	    	//store the key/value pairs within a single set object
+	    	.entrySet()
+	    	//use stream API in order to be able to utilize sorted method
+	   		.stream()
+	   		//sort the elements based on their value from large
+	   		.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+	   		//create a linked map collection with the key/value pairs of each element within the stream. A linkedmap is used in order to maintain order of the map
+    		.collect( Collectors.toMap(element -> element.getKey(), element -> element.getValue(), (element1, element2) -> element2, LinkedHashMap::new));
+	    	return sortedWordByCount;
 	}
 	
+	public void printTopWordsOnWebPage(Map<String,Integer> wordMap, int wordsDesired) {
+		int i = 1;
+		Iterator<Map.Entry<String,Integer>> entries = wordMap.entrySet().iterator();
+		while (i < wordsDesired + 1) {
+			Map.Entry<String, Integer> entry = entries.next();
+			System.out.println(entry.getKey()+entry.getValue() + "..." + i);
+			i++;
+		}
+		
+	}
 	
 }
