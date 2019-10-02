@@ -18,21 +18,30 @@ public class Application {
 
 	//this method begins the application after being called from the Main class
 	public void start () throws IOException {
-		this.getUrlFromUser();
+		//get the desired url input from user via console
+		String url = this.getUrlFromUser();
+		//scrape the url for text
+		Map<String,Integer> unsortedCountByWords = this.getTextFromUrl(url);
+		//sort all words from the url and sort them by number of time they appear
+		Map<String,Integer> sortedCountByWords = this.sortByCount(unsortedCountByWords);
+		//Go through sorted word list and log first 25 words
+		
+		//prompt the user if they would like to pass a new url
+		
+		
 	}
 	
 	//this method gets the url from the user and stores it to be used
-	public void getUrlFromUser () throws IOException {
+	public String getUrlFromUser () throws IOException {
 		//prompt the user to enter the url and store their response within a string variable
 		System.out.println("Enter the url");
 		Scanner scanner = new Scanner(System.in);
 		String url = scanner.nextLine();				
 		scanner.close();
-		//take the url and pass it to class method in order to be scraped
-		this.scrapeURLForText(url);		
+		return url;
 	}
 	
-	public void scrapeURLForText (String url) throws IOException {
+	public Map<String,Integer> getTextFromUrl (String url) throws IOException {
 		 //take in user inputed url and get text from webpage
 		 String textFromUrl = Jsoup.connect("https://www.quora.com/What-does-throws-IOexception-mean").get().text();
 		 //store each individual word from the textFromUrl into an array
@@ -45,9 +54,9 @@ public class Application {
 			 //add the word to the hashtable with either a count value incremented by 1
 			 countByWord.put(cleanedWord, count+1);
 		 }
-		 
-		 this.sortByCount(countByWord);
-//		 System.out.println(countByWord);
+		 return countByWord;
+		 //pass the array to a sortinng method to sort each word by its count
+//		 this.sortByCount(countByWord);
 		 		 
 	}
 	
@@ -60,18 +69,17 @@ public class Application {
 	}
 	
 	
-	public Map<String, Integer> sortByCount(Map<String, Integer> unsortedWordByCount) {
+	public Map<String, Integer> sortByCount(Map<String, Integer> unsortedCountByWord) {
 		
-	    Map<String, Integer> sortedWordByCount = unsortedWordByCount
+	    Map<String, Integer> sortedWordByCount = unsortedCountByWord
 	    		//store the key/value pairs within a single set object
 	    		.entrySet()
-	    		//use stream API in order to be able to utilize methods
+	    		//use stream API in order to be able to utilize sorted method
 	    		.stream()
-	    		//sort the elements by their values
+	    		//sort the elements based on their value from large
 	    		.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-	    		//convert the data into a linkedhashmap to maintain sorted order of list
-	    		.collect( Collectors.toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2, LinkedHashMap::new));
-	    		System.out.println(sortedWordByCount);
+	    		//create a linked map collection with the key/value pairs of each element within the stream. A linkedmap is used in order to maintain order of the map
+	    		.collect( Collectors.toMap(element -> element.getKey(), element -> element.getValue(), (element1, element2) -> element2, LinkedHashMap::new));
 	    		return sortedWordByCount;
 	}
 	
