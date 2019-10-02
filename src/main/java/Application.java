@@ -3,6 +3,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import org.jsoup.Jsoup;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.stream.Collectors;
+import java.util.Map.Entry;
+
+
 
 public class Application {
 	
@@ -53,8 +60,19 @@ public class Application {
 	}
 	
 	
-	public Map sortByCount() {
+	public Map<String, Integer> sortByCount(Map<String, Integer> unsortedWordByCount) {
 		
+	    Map<String, Integer> sortedWordByCount = unsortedWordByCount
+	    		//store the key/value pairs within a single set object
+	    		.entrySet()
+	    		//use stream API in order to be able to utilize methods
+	    		.stream()
+	    		//sort the elements by their values
+	    		.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+	    		//convert the data into a linkedhashmap to maintain sorted order of list
+	    		.collect( Collectors.toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2, LinkedHashMap::new));
+	    		System.out.println(sortedWordByCount);
+	    		return sortedWordByCount;
 	}
 	
 	
