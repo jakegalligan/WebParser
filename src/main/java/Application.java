@@ -41,22 +41,24 @@ public class Application {
 		System.out.println("Enter the url");
 		Scanner scanner = new Scanner(System.in);
 		String url = scanner.nextLine();				
-//		scanner.close();
 		return url;
 	}
 	
 	public Map<String,Integer> getTextFromUrl (String url) throws IOException {
 		 //take in user inputed url and get text from webpage
-		 String textFromUrl = Jsoup.connect("https://www.quora.com/What-does-throws-IOexception-mean").get().text();
+		 String textFromUrl = Jsoup.connect(url).get().text();
 		 //store each individual word from the textFromUrl into an array
 		 String arrayOfWords[] = textFromUrl.split(" ");
 		 //go through each word in the array either placing them in HashMap or incrementing its count value
 		 for(String word: arrayOfWords) {
 			 String cleanedWord = this.cleanWord(word);
+			 //add check to make sure no empty strings are being passed
+			 if (cleanedWord.length() != 0) {
 			 //if the word is alread in the hashmap store its count in the count variable, otherwise make count 0
 			 int count = countByWord.containsKey(cleanedWord) ? countByWord.get(cleanedWord) : 0; 
 			 //add the word to the hashtable with either a count value incremented by 1
 			 countByWord.put(cleanedWord, count+1);
+			 }
 		 }
 		 return countByWord;		 		 
 	}
