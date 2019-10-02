@@ -1,12 +1,13 @@
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import org.jsoup.Jsoup;
 
 public class Application {
 	
 	 //create hashmap to store the count of each individual word
-	 public HashMap<String, Integer> countByWord   = new HashMap<String, Integer>();
+	 public Map<String, Integer> countByWord   = new HashMap<String, Integer>();
 
 	//this method begins the application after being called from the Main class
 	public void start () throws IOException {
@@ -37,7 +38,9 @@ public class Application {
 			 //add the word to the hashtable with either a count value incremented by 1
 			 countByWord.put(cleanedWord, count+1);
 		 }
-		 System.out.println(countByWord);
+		 
+		 this.sortByCount(countByWord);
+//		 System.out.println(countByWord);
 		 		 
 	}
 	
@@ -48,4 +51,11 @@ public class Application {
 		String cleanedWord = lowerCaseWord.replaceAll("[^a-zA-Z&&[^-]]", "");
 		return cleanedWord;
 	}
+	
+	
+	public Map sortByCount() {
+		
+	}
+	
+	
 }
