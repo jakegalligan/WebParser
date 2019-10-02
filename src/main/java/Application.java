@@ -29,7 +29,8 @@ public class Application {
 		//Go through sorted word list and log first 25 words
 		int wordsDesired = 25;
 		this.printTopWordsOnWebPage(sortedCountByWords,wordsDesired);
-		//prompt the user if they would like to pass a new url
+		//restart the application
+		Main.restart();
 		
 		
 	}
@@ -40,7 +41,7 @@ public class Application {
 		System.out.println("Enter the url");
 		Scanner scanner = new Scanner(System.in);
 		String url = scanner.nextLine();				
-		scanner.close();
+//		scanner.close();
 		return url;
 	}
 	
@@ -57,10 +58,7 @@ public class Application {
 			 //add the word to the hashtable with either a count value incremented by 1
 			 countByWord.put(cleanedWord, count+1);
 		 }
-		 return countByWord;
-		 //pass the array to a sortinng method to sort each word by its count
-//		 this.sortByCount(countByWord);
-		 		 
+		 return countByWord;		 		 
 	}
 	
 	public String cleanWord (String word) {
@@ -87,13 +85,13 @@ public class Application {
 	
 	public void printTopWordsOnWebPage(Map<String,Integer> wordMap, int wordsDesired) {
 		int i = 1;
+		//create an iterator based off the entries within the map of most used words
 		Iterator<Map.Entry<String,Integer>> entries = wordMap.entrySet().iterator();
+		//print the top 25 words in order
 		while (i < wordsDesired + 1) {
 			Map.Entry<String, Integer> entry = entries.next();
-			System.out.println(entry.getKey()+entry.getValue() + "..." + i);
+			System.out.println(i+". " + entry.getKey() + ": " + entry.getValue());
 			i++;
 		}
-		
 	}
-	
 }

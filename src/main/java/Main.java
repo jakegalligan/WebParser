@@ -7,5 +7,10 @@ public class Main {
 		Application application = new Application();
 		application.start();
 	}
+	
+	public static void restart () throws IOException {
+		Application application = new Application();
+		application.start();
+	}
 
 }
