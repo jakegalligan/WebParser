@@ -6,7 +6,7 @@ WebParser is a console based application that allows users to input a URL and re
 
 ## Runing the application
 ### 1. Executable Jar File
-Clone repository and create an executable jar file which will then be able to run the application. *Note* Jar files can be sent directly to user upon request. To run jar file:
+Clone repository and create an executable jar file which will then be able to run the application. **Note** Jar files can be sent directly to user upon request. To run jar file:
 ```bash
 java -jar [name of jar file]
 ```
