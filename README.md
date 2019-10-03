@@ -6,7 +6,7 @@ WebParser is a console based application that allows users to input a URL and re
 
 ## Runing the application
 ### 1. Executable Jar File
-Clone repository and create an executable jar file which will then be able to run the application. **Note** Jar files can be sent directly to user upon request. To run jar file:
+Clone repository and create an executable jar file which will then be able to run the application. **NOTE:** Jar files can be sent directly to user upon request. To run jar file:
 ```bash
 java -jar [name of jar file]
 ```
@@ -20,9 +20,9 @@ java Main
 ```
 
 ## Notes
-# Author Notes
+### Author Notes
 This was my first time working with Java and was a great learning experience in exploring the syntax and structure of Java as well as JSoup and its capabilities
-# Challenges
+### Challenges
 Some challenges I had to address along the way:
 1. I encountered that parentheses and punctuation marks would be attached to words when splitting the string into an array of strings. Had to use regex expressions to remove any unwanted characters 
 
